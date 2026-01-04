@@ -1,0 +1,81 @@
+ set zoneheight 8
+ dim playerx=a
+ dim playery=b
+ dim score=c
+ dim dot1x=d
+ dim dot1y=e
+ dim dot2x=f
+ dim dot2y=g
+ dim dot3x=h
+ dim dot3y=i
+ dim dx=j
+ dim dy=k
+
+ incgraphic lizard.png 
+ incgraphic dot.png 
+ incgraphic atascii.png
+
+ P0C1=$82
+ P0C2=$48
+ P0C3=$fb
+
+ P1C1=$82
+ P1C2=$48
+ P1C3=$fb
+
+ P2C1=$82
+ P2C2=$48
+ P2C3=$fb
+
+ dot1x=30
+ dot1y=20
+ dot2x=80
+ dot2y=60
+ dot3x=50
+ dot3y=40
+
+ score=0
+
+ characterset atascii
+ alphachars ASCII
+
+main
+ clearscreen
+
+ plotchars 'SCORE:' 0 0 0
+ plotchars score 0 6 0
+
+ if joy0left then playerx=playerx-1
+ if joy0right then playerx=playerx+1
+ if joy0right then playerx=playerx+1
+ if joy0down then playery=playery+1
+ if joy0up then playery=playery-1
+
+ plotsprite lizard 0 playerx playery
+
+ if dot1x < 200 then plotsprite dot 0 dot1x dot1y
+ if dot2x < 200 then plotsprite dot 1 dot2x dot2y
+ if dot3x < 200 then plotsprite dot 2 dot3x dot3y
+
+ gosub check_collisions
+
+ drawscreen
+ goto main
+
+check_collisions
+ if dot1x < 200 then gosub check_dot1
+ if dot2x < 200 then gosub check_dot2
+ if dot3x < 200 then gosub check_dot3
+ return
+
+check_dot1
+ if playerx > dot1x - 20 && playerx < dot1x + 20 && playery > dot1y - 20 && playery < dot1y + 20 then dot1x=200 : dot1y=200 : score=score+1
+ return
+
+check_dot2
+ if playerx > dot2x - 20 && playerx < dot2x + 20 && playery > dot2y - 20 && playery < dot2y + 20 then dot2x=200 : dot2y=200 : score=score+1
+ return
+
+check_dot3
+ if playerx > dot3x - 20 && playerx < dot3x + 20 && playery > dot3y - 20 && playery < dot3y + 20 then dot3x=200 : dot3y=200 : score=score+1
+ return
