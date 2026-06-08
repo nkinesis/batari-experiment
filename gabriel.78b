@@ -1,4 +1,4 @@
- set zoneheight 8
+ set zoneheight 16
  dim playerx=a
  dim playery=b
  dim score=c
