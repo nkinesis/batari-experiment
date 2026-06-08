@@ -1,4 +1,6 @@
  set zoneheight 16
+ set plotvalueonscreen on
+ displaymode 160A
  dim playerx=a
  dim playery=b
  dim score=c
@@ -33,6 +35,9 @@
  dot2y=60
  dot3x=50
  dot3y=40
+ P1C1=$82
+ P1C2=$48
+ P1C3=$fb
 
  score=0
 
@@ -43,7 +48,7 @@ main
  clearscreen
 
  plotchars 'SCORE:' 0 0 0
- plotchars score 0 6 0
+ plotvalue atascii 1 score 1 6 0 
 
  if joy0left then playerx=playerx-1
  if joy0right then playerx=playerx+1
